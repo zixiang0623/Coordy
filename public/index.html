@@ -1,158 +1,173 @@
 <!DOCTYPE html>
 <html lang="ja"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Coordy(コーディー)</title>
-<link href="https://fonts.googleapis.com/css2?family=Yomogi&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+<meta name="color-scheme" content="light">
+<title>Coordy</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0..1,0&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1f2a44;--grid:#cfe3dc;--hl:#ffe76a;--pk:#ff6fa0;--sky:#5cb7ff;--paper:#f3f8f6}
+:root{color-scheme:light;
+--md-sys-color-primary:#6750A4;--md-sys-color-on-primary:#FFFFFF;--md-sys-color-primary-container:#EADDFF;--md-sys-color-on-primary-container:#21005D;
+--md-sys-color-secondary:#625B71;--md-sys-color-on-secondary:#FFFFFF;--md-sys-color-secondary-container:#E8DEF8;--md-sys-color-on-secondary-container:#1D192B;
+--md-sys-color-tertiary:#7D5260;--md-sys-color-on-tertiary:#FFFFFF;--md-sys-color-tertiary-container:#FFD8E4;--md-sys-color-on-tertiary-container:#31111D;
+--md-sys-color-surface:#FEF7FF;--md-sys-color-surface-dim:#DED8E1;--md-sys-color-surface-bright:#FEF7FF;--md-sys-color-surface-container-lowest:#FFFFFF;--md-sys-color-surface-container-low:#F7F2FA;--md-sys-color-surface-container:#F3EDF7;--md-sys-color-surface-container-high:#ECE6F0;--md-sys-color-surface-container-highest:#E6E0E9;
+--md-sys-color-surface-variant:#E7E0EC;--md-sys-color-surface-tint:#6750A4;--md-sys-color-background:#FEF7FF;--md-sys-color-on-background:#1D1B20;
+--md-sys-color-on-surface:#1D1B20;--md-sys-color-on-surface-variant:#49454F;--md-sys-color-outline:#79747E;--md-sys-color-outline-variant:#CAC4D0;
+--md-sys-color-inverse-surface:#322F35;--md-sys-color-inverse-on-surface:#F5EFF7;--md-sys-color-inverse-primary:#D0BCFF;
+--md-sys-color-error:#B3261E;--md-sys-color-on-error:#FFFFFF;--md-sys-color-error-container:#F9DEDC;--md-sys-color-on-error-container:#410E0B;
+--md-sys-color-scrim:#000000;--md-sys-color-shadow:#000000;
+--s:var(--md-sys-color-surface);--sc:var(--md-sys-color-surface-container);--scl:var(--md-sys-color-surface-container-low);--sch:var(--md-sys-color-surface-container-high);--schst:var(--md-sys-color-surface-container-highest);
+--os:var(--md-sys-color-on-surface);--osv:var(--md-sys-color-on-surface-variant);--p:var(--md-sys-color-primary);--op:var(--md-sys-color-on-primary);--pc:var(--md-sys-color-primary-container);--opc:var(--md-sys-color-on-primary-container);
+--ol:var(--md-sys-color-outline);--olv:var(--md-sys-color-outline-variant);--er:var(--md-sys-color-error);--erc:var(--md-sys-color-error-container);--oerc:var(--md-sys-color-on-error-container);
+--md-ref-typeface-brand:Roboto,'Noto Sans JP',sans-serif;--md-ref-typeface-plain:Roboto,'Noto Sans JP',sans-serif;--md-icon-font:'Material Symbols Rounded';
+--md-navigation-bar-container-color:var(--sc);--md-navigation-bar-container-height:80px;--md-navigation-bar-active-indicator-width:64px;--md-navigation-bar-active-indicator-height:32px;
+--md-dialog-container-shape:28px;--md-dialog-container-color:var(--md-sys-color-surface-container-high);
+--e:cubic-bezier(.2,0,0,1)}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
-body{background:#dfe9e5;font-family:'Yomogi','Zen Maru Gothic',sans-serif;color:var(--ink);font-size:16px}
-#app{max-width:430px;height:100dvh;margin:auto;display:flex;flex-direction:column;background:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;position:relative;overflow:hidden}
-header{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 8px;background:var(--paper);border-bottom:2.5px solid var(--ink)}
-header h1{font-size:20px;letter-spacing:.05em}
-.av,.wb{width:42px;height:42px;border:2.5px solid var(--ink);border-radius:50%;background:#fff;font-size:22px;display:grid;place-items:center;cursor:pointer}
-.wb{border-radius:12px;font-size:18px;line-height:1}
-#main{flex:1;overflow:auto;padding:12px 12px 16px}
-nav{display:flex;border-top:2.5px solid var(--ink);background:var(--paper);padding-bottom:env(safe-area-inset-bottom,0px)}
-nav button{flex:1;border:0;background:none;font:inherit;font-size:11px;padding:7px 0 6px;color:var(--ink);cursor:pointer}
-nav button span{display:block;font-size:22px;width:38px;height:34px;margin:0 auto 1px;border:2px solid transparent;border-radius:10px;line-height:34px}
-nav button.on span{border-color:var(--ink);background:var(--hl)}
-.card{background:#fff;border:2.5px solid var(--ink);border-radius:14px;padding:12px;margin-bottom:12px;box-shadow:3px 3px 0 var(--ink)}
-h3{font-size:19px;margin-bottom:6px}h3 small{font-size:13px;margin-left:6px}
-p{margin:4px 0}small{opacity:.75}
-.big{font-size:23px;line-height:1.5;border-bottom:2px solid var(--ink);padding:2px 0 4px;margin-bottom:6px}
-.hl{background:linear-gradient(transparent 55%,var(--hl) 55%)}
-.fit{display:flex;gap:6px;margin:8px 0}.fit>*{width:62px;height:62px;border:2px solid var(--ink);border-radius:10px;background:#fff;object-fit:cover;padding:3px}
-.fit.sm>*{width:34px;height:34px;padding:2px;border-width:1.5px;border-radius:7px}
-.ch{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
-.ch b,.pb,.sb button,.tool{font:inherit;font-weight:400;border:2px solid var(--ink);border-radius:20px;padding:5px 12px;background:#fff;color:var(--ink);cursor:pointer;font-size:14px}
-.ch b.on{background:var(--hl)}.ch b.ng{background:#fff}
-.pb{background:var(--pk);color:#fff;border-width:2.5px;width:100%;padding:10px;font-size:17px;margin-top:8px;box-shadow:2px 2px 0 var(--ink)}
-.pb.alt{background:var(--sky)}
-.tool{display:block;width:100%;margin:6px 0;text-align:left}
-.row{display:flex;align-items:center;gap:10px;cursor:pointer;padding:8px 10px}
-.dd{width:46px;text-align:center;font-size:17px}.mini{flex:1}
-.tg em{display:inline-block;font-style:normal;font-size:11px;background:var(--hl);border:1.5px solid var(--ink);border-radius:8px;padding:0 5px;margin:1px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.it{position:relative;text-align:center;border:2px solid var(--ink);border-radius:12px;padding:8px;background:#fff}
-.it svg,.it img{width:70px;height:70px;object-fit:cover;border-radius:8px}
-.it .rm{position:absolute;right:4px;top:2px;border:0;background:none;font-size:16px;cursor:pointer}
-.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center}
-.cal div{border:1.5px solid var(--ink);border-radius:8px;min-height:44px;background:#fff;padding:2px;font-size:13px;cursor:pointer}
-.cal div.h{border:0;background:none;min-height:0;cursor:default}.cal div.t{background:var(--hl)}
-.cal i{display:block;font-style:normal;font-size:10px;line-height:1}
-.bar{height:12px;border:2px solid var(--ink);border-radius:8px;background:#fff;overflow:hidden}.bar i{display:block;height:100%;background:var(--sky)}
-.sw{display:inline-block;width:30px;height:30px;border:2px solid var(--ink);border-radius:50%;cursor:pointer}.sw.on{outline:3px solid var(--pk);outline-offset:1px}
-#sh{position:fixed;inset:0;background:#0006;display:none;align-items:flex-end;z-index:5}#sh.on{display:flex}
-.sb{width:100%;max-width:430px;margin:auto;background:var(--paper);border:2.5px solid var(--ink);border-radius:20px 20px 0 0;padding:16px;max-height:88dvh;overflow:auto;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
-.sb>button{margin-top:10px;width:100%}
-input[type=text],select{width:100%;font:inherit;border:2px solid var(--ink);border-radius:10px;padding:8px;background:#fff;margin:4px 0}
-input[type=range]{width:100%}.pv{width:100px;height:100px;object-fit:cover;border:2px solid var(--ink);border-radius:10px}
-.warn{background:#ffe3ec}.ok{background:#e0f7ee}
-.tip{font-size:12px;opacity:.7}
-#tt{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 16px;border-radius:20px;font-size:14px;opacity:0;transition:.25s;pointer-events:none;z-index:9;max-width:90%;text-align:center}#tt.on{opacity:1}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-</style></head><body>
+body{background:var(--schst);font-family:var(--md-ref-typeface-plain);color:var(--os);overflow:hidden}
+#app{position:relative;width:min(100vw,412px);height:min(100dvh,892px);margin:0 auto;display:flex;flex-direction:column;background:var(--s);overflow:hidden}
+md-icon.f{font-variation-settings:'FILL' 1}
+.tl{font-size:22px;line-height:28px}.tm{font-size:16px;line-height:24px;font-weight:500}.bm{font-size:14px;line-height:20px}.lm{font-size:12px;line-height:16px;font-weight:500}.hs{font-size:28px;line-height:36px}.v{color:var(--osv)}
+.tb{display:flex;align-items:center;gap:4px;height:64px;padding:0 4px;background:var(--s);transition:background .3s var(--e);flex:none}.tb.sc{background:var(--sc)}.tb>.tl{flex:1;text-align:center}
+main{flex:1;min-height:0;overflow-y:auto;position:relative}
+main>section{display:none;min-height:100%}main>section.on{display:block;animation:fi .25s var(--e)}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+#t0.on{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:16px}
+#t2.on{display:flex;flex-direction:column;height:100%}
+.imgbox{position:relative;width:min(384px,100%);aspect-ratio:384/408;background:var(--sch);border-radius:28px;overflow:hidden;display:grid;place-items:center;text-align:center}
+.imgbox.sq{aspect-ratio:1;width:100%}.imgbox img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.imgbox.err{outline:2px solid var(--er)}
+.tap{cursor:pointer;transition:transform .2s var(--e)}.tap:active{transform:scale(.97)}
+.em{display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px;color:var(--osv)}.em md-icon{font-size:48px;width:48px;height:48px}
+.cm{width:min(384px,100%);text-align:left;overflow-wrap:anywhere}.cm .hs{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.form{display:flex;flex-direction:column;gap:16px;padding:16px}
+.form md-outlined-text-field,.form md-outlined-select{width:100%}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:8px 16px 104px}
+.card{position:relative;border-radius:20px;background:var(--scl);overflow:hidden}.card img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:var(--sch)}.card .ct{padding:8px 12px 12px}.card .ct div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sr{padding:8px 16px 0}.sr md-outlined-text-field{width:100%;--md-outlined-text-field-container-shape:28px}
+md-chip-set{padding:8px 16px}
+md-fab{position:absolute;right:16px;bottom:96px;z-index:2}
+#cl{flex:1;overflow-y:auto;padding:8px 16px;display:flex;flex-direction:column;gap:8px}
+.m{max-width:82%;padding:10px 14px;border-radius:20px;overflow-wrap:anywhere;white-space:pre-wrap}.m.u{align-self:flex-end;background:var(--p);color:var(--op);border-bottom-right-radius:4px}.m.b{align-self:flex-start;background:var(--sch);border-bottom-left-radius:4px}
+.th{display:flex;gap:6px;margin-top:8px}.th img{width:56px;height:56px;object-fit:cover;border-radius:12px}
+.cb{display:flex;align-items:center;gap:8px;padding:8px 16px 12px;flex:none}.cb md-outlined-text-field{flex:1;--md-outlined-text-field-container-shape:28px}
+.wr{display:flex;align-items:center;gap:8px;margin:0 16px 8px;padding:8px 4px 8px 8px;background:var(--scl);border-radius:20px}.wr .wt{flex:1;min-width:0;cursor:pointer}.wr.dn .wt{text-decoration:line-through;opacity:.6}
+.wh{display:flex;justify-content:space-between;align-items:baseline;padding:16px 16px 8px}
+#sub{position:absolute;inset:0;z-index:4;background:var(--s);display:flex;flex-direction:column;transform:translateX(100%);visibility:hidden;transition:transform .3s var(--e),visibility 0s .3s}
+#sub.on{transform:none;visibility:visible;transition:transform .3s var(--e),visibility 0s}
+.sb{flex:1;overflow-y:auto;padding-bottom:24px}.sb .imgbox{margin:0 16px;width:calc(100% - 32px)}
+md-list{--md-list-container-color:transparent}
+.dg{color:var(--er)}
+#snack{position:absolute;left:16px;right:16px;bottom:96px;z-index:9;padding:14px 16px;border-radius:12px;background:var(--md-sys-color-inverse-surface);color:var(--md-sys-color-inverse-on-surface);opacity:0;transform:translateY(8px);pointer-events:none;transition:.3s var(--e);font-size:14px}#snack.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+</style>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@material/web@2.3.0/all.js/+esm"></script>
+</head><body>
 <div id="app">
-<header><div class="av" id="avb" onclick="prof()" role="button" aria-label="プロフィール">😊</div><h1>Coordy <small>コーディー</small></h1><div class="wb" id="wxb" aria-hidden="true">☀️</div></header>
-<div id="main"></div>
-<nav id="nav"></nav>
-<div id="sh" onclick="if(event.target===this)cl()"></div>
-<div id="tt"></div>
+<div class="tb" id="tb"><md-icon-button data-a="prof" aria-label="プロフィール"><md-icon>account_circle</md-icon></md-icon-button><div class="tl">Coordy</div><md-icon-button data-a="set" aria-label="設定"><md-icon>settings</md-icon></md-icon-button></div>
+<main id="mn">
+<section id="t0" class="on"><div class="imgbox tap" id="hb"><md-ripple></md-ripple></div>
+<div class="cm"><div class="lm v" id="hn"></div><div class="hs" id="hc"></div></div>
+<md-filled-tonal-button id="hs"><md-icon slot="icon">shuffle</md-icon>別の服にする</md-filled-tonal-button></section>
+<section id="t1"><div class="sr"><md-outlined-text-field id="q" label="服を検索" type="search"><md-icon slot="leading-icon">search</md-icon></md-outlined-text-field></div>
+<md-chip-set id="fc"></md-chip-set><div class="lm v" id="cn" style="padding:0 16px 8px"></div><div id="cg"></div></section>
+<section id="t2"><div style="display:flex;align-items:center;padding:0 16px"><div class="tm" style="flex:1">コーデ相談</div><md-icon-button data-a="clr" aria-label="履歴を消す"><md-icon>delete_sweep</md-icon></md-icon-button></div><div id="cl"></div>
+<md-chip-set id="qc" style="padding:0 16px"></md-chip-set>
+<div class="cb"><md-outlined-text-field id="ci" label="メッセージ" maxlength="200"></md-outlined-text-field><md-filled-icon-button data-a="send" aria-label="送信"><md-icon>send</md-icon></md-filled-icon-button></div></section>
+<section id="t3"><div class="form"><div class="imgbox tap" id="ub" data-a="pick"><md-ripple></md-ripple><div class="em"><md-icon>add_a_photo</md-icon><div class="bm">写真を選ぶ・撮る</div></div></div><div id="uf"></div>
+<md-filled-button data-a="up"><md-icon slot="icon">upload</md-icon>登録する</md-filled-button></div></section>
+<section id="t4"><div class="wh"><div class="tm">ほしい物リスト</div><div class="bm v" id="wtot"></div></div><div id="wl" style="padding-bottom:104px"></div></section>
+</main>
+<md-fab id="ff" hidden aria-label="服を追加" data-a="goup"><md-icon slot="icon">add</md-icon></md-fab>
+<md-fab id="fw" hidden label="追加" variant="primary" data-a="wadd"><md-icon slot="icon">add</md-icon></md-fab>
+<md-navigation-bar id="nb">
+<md-navigation-tab label="ホーム"><md-icon slot="active-icon" class="f">home</md-icon><md-icon slot="inactive-icon">home</md-icon></md-navigation-tab>
+<md-navigation-tab label="服"><md-icon slot="active-icon" class="f">apparel</md-icon><md-icon slot="inactive-icon">apparel</md-icon></md-navigation-tab>
+<md-navigation-tab label="チャット"><md-icon slot="active-icon" class="f">sms</md-icon><md-icon slot="inactive-icon">sms</md-icon></md-navigation-tab>
+<md-navigation-tab label="アップロード"><md-icon slot="active-icon" class="f">upload</md-icon><md-icon slot="inactive-icon">upload</md-icon></md-navigation-tab>
+<md-navigation-tab label="ショップ"><md-icon slot="active-icon" class="f">shopping_cart</md-icon><md-icon slot="inactive-icon">shopping_cart</md-icon></md-navigation-tab>
+</md-navigation-bar>
+<div id="sub"></div><div id="snack" role="status"></div>
 </div>
-<input type="file" id="fp" accept="image/*" capture="environment" hidden>
-<input type="file" id="fo" accept="image/*" hidden>
-<input type="file" id="fi" accept=".ics,text/calendar" hidden>
-<script>
-const $=s=>document.querySelector(s),pad=n=>String(n).padStart(2,'0'),iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`,addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x},WD='日月火水木金土',hs=s=>[...String(s)].reduce((a,c)=>a+c.charCodeAt(0),0);
-const COL={white:['#f6f4ee','白'],black:['#2b2b2e','黒'],gray:['#9a9ca3','グレー'],navy:['#2c3e6b','ネイビー'],blue:['#6fa3d8','青'],beige:['#d9c3a0','ベージュ'],brown:['#8a5e3c','茶'],red:['#d9534f','赤'],pink:['#f2a7b8','ピンク'],green:['#6b9a6b','緑'],khaki:['#8b8a5a','カーキ'],yellow:['#f0cf5a','黄']};
-const CAT={top:'トップス',outer:'アウター',bottom:'ボトムス',shoes:'シューズ'},SC={club:'部活',pool:'プール',pe:'体育'};
-const P={top:'M20 8l-12 6 4 10 5-2v26h22V22l5 2 4-10-12-6c-1 4-4 6-8 6s-7-2-8-6z',outer:'M20 6l-14 8 3 12 6-2v26h26V24l6 2 3-12-14-8-2 6h-8z',bottom:'M16 6h32l3 52H35l-3-30-3 30H13z',shoes:'M6 40c6 0 10-2 14-8l6 4c3 2 8 2 14 2 6 0 12 2 14 6v6H6z'};
-const ico=x=>x.ph?`<img src="${x.ph}" alt="${x.n}">`:`<svg viewBox="0 0 64 64" role="img" aria-label="${x.n}"><path d="${P[x.cat]}" fill="${COL[x.col][0]}" stroke="#1f2a44" stroke-width="2.5" stroke-linejoin="round"/>${x.cat=='outer'?'<path d="M32 12v46" stroke="#1f2a44" stroke-width="2"/>':''}</svg>`;
-const fit=(o,sm)=>`<div class="fit ${sm?'sm':''}">${['top','outer','bottom','shoes'].map(c=>o[c]?ico(o[c]):'').join('')}</div>`;
-const mk=(id,n,cat,col,w,r)=>({id,n,cat,col,w,r:r||0,ph:''});
-const def={closet:[mk('a1','白T','top','white',2),mk('a2','グレーのロンT','top','gray',3),mk('a3','ネイビースウェット','top','navy',4),mk('b1','ジップパーカー','outer','gray',3),mk('b2','ウインドブレーカー','outer','navy',2,1),mk('c1','黒カーゴ','bottom','black',3),mk('c2','デニム','bottom','blue',3),mk('c3','ベージュチノ','bottom','beige',3),mk('d1','白スニーカー','shoes','white',3),mk('d2','黒スニーカー','shoes','black',3,1)],sched:{},me:{n:'じぶん',g:'中2',xp:0,st:0,last:'',em:'😊'},fol:['f1','f2'],pro:false,lk:{},seed:0};
-let S;try{S=Object.assign({},def,JSON.parse(localStorage.getItem('coorde1')))}catch(e){S=structuredClone(def)}
-const save=()=>{try{localStorage.setItem('coorde1',JSON.stringify(S))}catch(e){toast('保存容量がいっぱいです。写真を減らしてね')}};
-const toast=m=>{const t=$('#tt');t.textContent=m;t.classList.add('on');clearTimeout(t._);t._=setTimeout(()=>t.classList.remove('on'),2600)};
-const today=new(Date);let T='home',PL=[];
-let W=[...Array(7)].map((_,i)=>({d:iso(addD(today,i)),hi:25-i%3,lo:20-i%4,rain:i==2?8:0}));
-function wload(la,lo){fetch(`https://api.open-meteo.com/v1/forecast?latitude=${la}&longitude=${lo}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto&forecast_days=7`).then(r=>r.json()).then(j=>{W=j.daily.time.map((d,i)=>({d,hi:Math.round(j.daily.temperature_2m_max[i]),lo:Math.round(j.daily.temperature_2m_min[i]),rain:j.daily.precipitation_sum[i]}));render()}).catch(()=>toast('天気を取得できないのでサンプル表示中'))}
-navigator.geolocation?navigator.geolocation.getCurrentPosition(p=>wload(p.coords.latitude,p.coords.longitude),()=>wload(35.18,136.91),{timeout:5000}):wload(35.18,136.91);
-const wx=d=>d.rain>=1?'🌧️':d.hi>=27?'☀️':d.rain>0?'☁️':'🌤️';
-/* friends */
-const FR=[{id:'f1',n:'みお',g:'中2',em:'🐰',s:92,fits:[{t:['白T','white'],b:['黒カーゴ','black'],o:['ジップパーカー','gray']},{t:['ロンT','navy'],b:['デニム','blue']},{t:['ボーダーT','white'],b:['チノ','beige'],o:['カーデ','pink']}]},
-{id:'f2',n:'はると',g:'中2',em:'🦊',s:88,fits:[{t:['スウェット','gray'],b:['黒カーゴ','black']},{t:['白T','white'],b:['デニム','blue'],o:['シャツ','green']},{t:['ロンT','khaki'],b:['チノ','beige']}]},
-{id:'f3',n:'ことは',g:'中3',em:'🐱',s:96,fits:[{t:['ニット','beige'],b:['プリーツ','navy']},{t:['白T','white'],b:['ワイドデニム','blue'],o:['ブルゾン','khaki']}]},
-{id:'f4',n:'そうた',g:'中2',em:'🐻',s:84,fits:[{t:['パーカー','red'],b:['黒カーゴ','black']},{t:['白T','white'],b:['ネイビーパンツ','navy']},{t:['ロンT','white'],b:['デニム','blue'],o:['ウインドブレーカー','navy']}]}];
-const ff=(f,d)=>f.fits[(Math.floor(new Date(d)/864e5)+f.n.length)%f.fits.length];
-const fobj=(f,d)=>{const x=ff(f,d),m=(a,c,i)=>a?{id:f.id+i,n:a[0],cat:c,col:a[1],w:3}:null;return{top:m(x.t,'top',1),bottom:m(x.b,'bottom',2),outer:m(x.o,'outer',3)}};
-const fkeys=d=>{const s=new Set();FR.filter(f=>S.fol.includes(f.id)).forEach(f=>{const o=fobj(f,d);['top','bottom'].forEach(c=>s.add(c+':'+o[c].col))});return s};
-const clash=(o,d)=>FR.filter(f=>S.fol.includes(f.id)).flatMap(f=>{const g=fobj(f,d);return['top','bottom'].filter(c=>o[c]&&o[c].col==g[c].col).map(c=>`${f.n}さんと${CAT[c]}(${COL[g[c].col][1]})`)});
-/* planner */
-function plan(day,i,used){const{hi,lo,rain,d}=day,s=S.sched[d]||{},t=hi>=27?1:hi>=22?2:hi>=16?3:hi>=10?4:5,fr=fkeys(d);
-const pick=(cat,tg)=>{const L=S.closet.filter(x=>x.cat==cat);return L.length?L.map(x=>({x,sc:-Math.abs(x.w-tg)*2-(used[x.id]||0)*1.5-(fr.has(x.cat+':'+x.col)?3:0)+(rain>=1&&x.r?2:0)+((hs(x.id)+i+S.seed)%5)*.3})).sort((a,b)=>b.sc-a.sc)[0].x:null};
-const o={top:pick('top',t),bottom:pick('bottom',t),shoes:pick('shoes',t)};
-if(lo<=21||hi-lo>=5||rain>=1||s.club)o.outer=pick('outer',Math.min(t+1,5));
-const tp=[];if(o.outer&&hi-lo>=4)tp.push(o.outer.n+'で調節!');
-if(s.club&&o.outer)tp.push(`部活がはじまる前に${o.outer.n}をぬごう!`);
-if(s.pool)tp.push('プール:着替えやすい服+タオルとヘアゴム');
-if(s.pe)tp.push('体育:汗をかくから替えのTシャツがあると安心');
-if(rain>=1)tp.push(`降水量${rain}mm:傘と濡れてもOKな靴`);
-if(hi>=30)tp.push('暑いよ!水筒を忘れずに');
-o.tips=tp;return o}
-function calc(){const u={};PL=W.map((d,i)=>{const o=plan(d,i,u);['top','outer','bottom','shoes'].forEach(c=>o[c]&&(u[o[c].id]=(u[o[c].id]||0)+1));return o})}
-const tags=s=>Object.keys(SC).filter(k=>s[k]).map(k=>`<em>${SC[k]}</em>`).join('');
-const chips=d=>`<div class="ch">${Object.keys(SC).map(k=>`<b class="${(S.sched[d]||{})[k]?'on':''}" onclick="tg('${d}','${k}')">${SC[k]}${(S.sched[d]||{})[k]?' 有':' 無'}</b>`).join('')}</div>`;
-function tg(d,k){S.sched[d]=S.sched[d]||{};S.sched[d][k]=!S.sched[d][k];save();render();if($('#sh').classList.contains('on')&&selI!=null)day(selI)}
+<md-dialog id="cf"><div slot="headline" id="cft"></div><form slot="content" id="cff" method="dialog"><span id="cfm"></span></form><div slot="actions"><md-text-button form="cff" value="no">キャンセル</md-text-button><md-text-button form="cff" value="ok" id="cfo"></md-text-button></div></md-dialog>
+<md-dialog id="wd"><div slot="headline" id="wdt"></div><form slot="content" id="wf" method="dialog" class="form" style="padding:0"><md-outlined-text-field id="wn" label="名前" maxlength="40"></md-outlined-text-field><md-outlined-text-field id="wp" label="予算(円・任意)" type="number" min="0" inputmode="numeric"></md-outlined-text-field><md-outlined-text-field id="wu" label="URL(任意)" type="url"></md-outlined-text-field></form><div slot="actions"><md-text-button data-a="wx">キャンセル</md-text-button><md-text-button data-a="ws">保存</md-text-button></div></md-dialog>
+<input type="file" id="fp" accept="image/*" hidden>
+<script type="module">
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),hs=s=>[...String(s)].reduce((a,c)=>a+c.charCodeAt(0),0);
+const CATS=['トップス','ボトムス','アウター','シューズ','小物'],COLS=['白','黒','グレー','ネイビー','青','ベージュ','茶','赤','ピンク','緑','カーキ','黄','その他'],WM=['うすい','やや薄い','ふつう','あたたかい','とてもあたたかい'];
+const D={clothes:[],chat:[],wish:[],meta:{}},U={};let T=0,UP=null,F=new Set(),WE=null;
+const IDB=new Promise((ok,ng)=>{const r=indexedDB.open('coordy',1);r.onupgradeneeded=()=>{const d=r.result;d.createObjectStore('clothes',{keyPath:'id'});d.createObjectStore('chat',{keyPath:'id',autoIncrement:true});d.createObjectStore('wish',{keyPath:'id'});d.createObjectStore('meta',{keyPath:'k'})};r.onsuccess=()=>ok(r.result);r.onerror=()=>ng(r.error)});
+const rq=r=>new Promise((ok,ng)=>{r.onsuccess=()=>ok(r.result);r.onerror=()=>ng(r.error)}),st=async(n,m)=>(await IDB).transaction(n,m||'readonly').objectStore(n);
+const all=async n=>rq((await st(n)).getAll()),put=async(n,v)=>rq((await st(n,'readwrite')).put(v)),del=async(n,k)=>rq((await st(n,'readwrite')).delete(k)),clr=async n=>rq((await st(n,'readwrite')).clear());
+const url=c=>U[c.id]||(U[c.id]=URL.createObjectURL(c.img)),yen=n=>'¥'+n.toLocaleString();
+function snack(m){const s=$('#snack');s.textContent=m;s.classList.add('on');clearTimeout(s._);s._=setTimeout(()=>s.classList.remove('on'),3000)}
+async function fail(f){try{return await f()}catch(e){snack('保存に失敗しました。もう一度お試しください');console.error(e)}}
+function ask(t,m,ok,dg){const d=$('#cf');$('#cft').textContent=t;$('#cfm').textContent=m;const b=$('#cfo');b.textContent=ok;b.className=dg?'dg':'';d.returnValue='';d.show();return new Promise(r=>d.addEventListener('closed',()=>r(d.returnValue==='ok'),{once:true}))}
+/* tabs */
+function go(i){T=i;$$('main>section').forEach((s,k)=>s.classList.toggle('on',k==i));$('#nb').activeIndex=i;$('#ff').hidden=i!=1;$('#fw').hidden=i!=4;$('#mn').scrollTop=0;$('#tb').classList.remove('sc');R()}
+$('#nb').addEventListener('navigation-bar-activated',()=>go($('#nb').activeIndex));
+$('#mn').addEventListener('scroll',e=>$('#tb').classList.toggle('sc',e.target.scrollTop>0));
+function R(){rHome();rCloset();rChat();rShop()}
+/* home */
+function pick(sh){const L=D.clothes;if(!L.length)return null;const t=new Date().toDateString();let p=D.meta.pick;if(sh||!p||p.d!=t||!L.some(c=>c.id==p.id)){let o=L.filter(c=>!p||c.id!=p.id);if(!o.length)o=L;const c=sh?o[Math.random()*o.length|0]:L[hs(t)%L.length];p={k:'pick',d:t,id:c.id};D.meta.pick=p;put('meta',p)}return L.find(c=>c.id==p.id)}
+function rHome(sh){const c=pick(sh),b=$('#hb');$('#hs').hidden=D.clothes.length<2;
+if(!c){b.innerHTML='<md-ripple></md-ripple><div class="em"><md-icon>apparel</md-icon><div class="tm">まだ服がありません</div><div class="bm">「アップロード」から写真を追加しましょう</div></div>';b.dataset.a='goup';$('#hn').textContent='';$('#hc').textContent='';return}
+b.dataset.a='open';b.dataset.i=c.id;b.innerHTML=`<md-ripple></md-ripple><img src="${url(c)}" alt="${esc(c.name)}">`;$('#hn').textContent=`${c.name} ・ ${c.cat} ・ ${c.col}`;const t=c.note||'コメントはまだありません。タップして追加できます';const h=$('#hc');h.textContent=t;h.className='hs'+(c.note?'':' v');h.style.fontSize=t.length>24?'22px':'28px'}
+/* closet */
+function rCloset(){const q=$('#q').value.trim().toLowerCase(),L=D.clothes.filter(c=>(!F.size||F.has(c.cat))&&(!q||(c.name+c.note+c.col+c.cat).toLowerCase().includes(q)));
+const fc=$('#fc');if(!fc.children.length)fc.innerHTML=CATS.map(c=>`<md-filter-chip label="${c}"></md-filter-chip>`).join('');
+$('#cn').textContent=D.clothes.length?`${L.length}着`:'';
+$('#cg').innerHTML=!D.clothes.length?'<div class="em"><md-icon>apparel</md-icon><div class="tm">服がまだ登録されていません</div><div class="bm">右下の＋から写真を追加しましょう</div></div>':!L.length?'<div class="em"><md-icon>search_off</md-icon><div class="tm">見つかりませんでした</div></div>':`<div class="grid">${L.map(c=>`<div class="card tap" data-a="open" data-i="${c.id}" role="button" tabindex="0"><md-ripple></md-ripple><img src="${url(c)}" alt=""><div class="ct"><div class="tm">${esc(c.name)}</div><div class="lm v">${c.cat} ・ ${c.col}</div></div></div>`).join('')}</div>`}
+$('#q').addEventListener('input',rCloset);$('#fc').addEventListener('click',()=>{F=new Set($$('#fc md-filter-chip').filter(c=>c.selected).map(c=>c.label));rCloset()});
+/* forms */
+const sel=(id,l,a,v,n)=>`<md-outlined-select id="${id}" label="${l}">${a.map((x,i)=>{const val=n?i+1:x;return`<md-select-option value="${val}" ${val==v?'selected':''}><div slot="headline">${n?`${i+1} ${x}`:x}</div></md-select-option>`}).join('')}</md-outlined-select>`;
+const fields=(p,c={})=>`<md-outlined-text-field id="${p}n" label="名前" maxlength="30" value="${esc(c.name)}"></md-outlined-text-field>`+sel(p+'c','カテゴリ',CATS,c.cat||CATS[0])+sel(p+'l','色',COLS,c.col||COLS[0])+sel(p+'w','あったかさ',WM,c.w||3,1)+`<md-outlined-text-field id="${p}m" label="コメント" type="textarea" rows="3" maxlength="200" value="${esc(c.note)}"></md-outlined-text-field>`;
+function rf(p){const n=$('#'+p+'n'),v=n.value.trim();n.error=!v;n.errorText=v?'':'名前を入力してください';if(!v){n.focus();return null}return{name:v,cat:$('#'+p+'c').value,col:$('#'+p+'l').value,w:+$('#'+p+'w').value,note:$('#'+p+'m').value.trim()}}
+$('#uf').innerHTML=fields('u');
+async function shrink(f){const b=await createImageBitmap(f),r=Math.min(1,1024/Math.max(b.width,b.height)),c=document.createElement('canvas');c.width=Math.round(b.width*r);c.height=Math.round(b.height*r);c.getContext('2d').drawImage(b,0,0,c.width,c.height);return new Promise((ok,ng)=>c.toBlob(x=>x?ok(x):ng(new Error('blob')),'image/jpeg',.85))}
+$('#fp').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;if(!f.type.startsWith('image/'))return snack('画像ファイルを選んでください');try{UP=await shrink(f);$('#ub').classList.remove('err');$('#ub').innerHTML=`<md-ripple></md-ripple><img src="${URL.createObjectURL(UP)}" alt="プレビュー">`}catch(x){snack('この画像は読み込めませんでした')}};
+/* chat */
+const QC=['今日のコーデ','暑い日のコーデ','寒い日のコーデ','雨の日のコーデ'];
+$('#qc').innerHTML=QC.map(q=>`<md-assist-chip label="${q}" data-q="${q}"></md-assist-chip>`).join('');
+function advise(q){const L=D.clothes;if(!L.length)return{t:'まだ服が登録されていません。「アップロード」から写真を追加すると、手持ちの服でコーデを考えます。'};
+const t=/暑|夏|半袖/.test(q)?1.5:/寒|冬|雪|コート/.test(q)?4.5:/涼|秋|春|肌寒|朝晩/.test(q)?3.5:3,by=cat=>L.filter(c=>c.cat==cat).map(c=>({c,s:Math.abs(c.w-t)+Math.random()*.9})).sort((a,b)=>a.s-b.s)[0]?.c;
+const o={top:by('トップス'),bottom:by('ボトムス'),outer:(t>=2.5||/羽織|上着|アウター/.test(q))?by('アウター'):null,shoes:by('シューズ')},l=Object.values(o).filter(Boolean);
+if(!l.length)return{t:'トップスやボトムスなど、コーデに使える服がまだありません。'};
+let s=`「${l.map(c=>c.name).join('」+「')}」はどうかな。`;if(!o.top||!o.bottom)s+=`\n${o.top?'ボトムス':'トップス'}が未登録なので、あるものだけで考えました。`;if(/雨|傘/.test(q))s+='\n雨なら濡れてもいい靴と傘を忘れずに。';return{t:s,ids:l.map(c=>c.id)}}
+function rChat(){const l=$('#cl');l.innerHTML=D.chat.length?D.chat.map(m=>`<div class="m ${m.r} bm">${esc(m.t)}${m.ids?`<div class="th">${m.ids.map(i=>D.clothes.find(c=>c.id==i)).filter(Boolean).map(c=>`<img src="${url(c)}" alt="${esc(c.name)}">`).join('')}</div>`:''}</div>`).join(''):'<div class="em" style="margin:auto"><md-icon>sms</md-icon><div class="tm">コーデ相談</div><div class="bm">手持ちの服から今日の一着を考えます</div></div>';l.scrollTop=l.scrollHeight}
+async function send(t){t=(t||$('#ci').value).trim();if(!t)return;$('#ci').value='';await fail(async()=>{const a=advise(t);for(const m of [{r:'u',t},{r:'b',...{t:a.t,ids:a.ids}}]){m.id=await put('chat',m);D.chat.push(m)}rChat()})}
+$('#ci').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();send()}});$('#qc').addEventListener('click',e=>{const q=e.target.closest('[data-q]');q&&send(q.dataset.q)});
 /* shop */
-const CATALOG=[{n:'ライトウインドブレーカー',cat:'outer',col:'navy',p:4980,w:'朝晩の肌寒さと雨に'},{n:'ワイドデニム',cat:'bottom',col:'blue',p:5490,w:'白Tにも黒にも合う定番'},{n:'ベージュのチノパン',cat:'bottom',col:'beige',p:4290,w:'やさしい雰囲気に'},{n:'白スニーカー',cat:'shoes',col:'white',p:6980,w:'どのコーデもきれいめに'},{n:'ボーダー長袖T',cat:'top',col:'navy',p:2990,w:'1枚でもパーカーの下でも'},{n:'カーキのブルゾン',cat:'outer',col:'khaki',p:6490,w:'グレーや黒と相性◎'}];
-function recs(){const n=c=>S.closet.filter(x=>x.cat==c).length;return CATALOG.filter(c=>!S.closet.some(x=>x.cat==c.cat&&x.col==c.col)).map(c=>({...c,id:'r'+c.n,x:c.cat=='top'?n('bottom')*(n('outer')+1):c.cat=='bottom'?n('top')*(n('outer')+1):n('top')*n('bottom')})).sort((a,b)=>b.x-a.x)}
-const shop=k=>S.pro?'':`<div class="card"><h3>これがあるともっとおしゃれ</h3>${recs().slice(0,k).map(r=>`<div class="row" style="padding:6px 0" onclick="toast('デモ:ここで提携ショップへ。購入価格は変わらず、運営に5%の紹介料が入ります')"><div class="fit" style="margin:0">${ico({...r,ph:''})}</div><div style="flex:1"><b>${r.n}</b><br><small>${r.w}・手持ちと合わせて+${r.x}通り</small></div><div>¥${r.p.toLocaleString()}</div></div>`).join('')||'<p>手持ちがそろってるよ!</p>'}<p class="tip">※紹介リンクを含みます(無料版のみ)。購入すると価格の5%が運営に入ります。</p></div>`;
-/* views */
-const V={
-home(){const d=W[0],o=PL[0],s=S.sched[d.d]||{},dt=new Date(d.d),c=clash(o,d.d),nm=['outer','top'].map(k=>o[k]&&o[k].n).filter(Boolean).join(' '),done=S.me.last==d.d;
-return`<div class="card"><h3>今日<small>${dt.getMonth()+1}/${dt.getDate()}(${WD[dt.getDay()]}) ${wx(d)}</small></h3>
-<div class="big"><span class="hl">${nm||'服を登録してね'}</span><br>${o.bottom?o.bottom.n:''}${o.shoes?`<small> / ${o.shoes.n}</small>`:''}</div>${fit(o)}
-<p>最高気温 <b>${d.hi}℃</b>　最低気温 <b>${d.lo}℃</b>　降水量 <b>${d.rain}mm</b></p>
-${o.tips.map(t=>`<p class="hl">${t}</p>`).join('')}<hr style="border:1.5px solid var(--ink);margin:8px 0">
-<small>今日の予定(タップで切り替え)</small>${chips(d.d)}
-<button class="pb" onclick="wear()" ${done?'disabled style="opacity:.5"':''}>${done?'今日のコーデ記録ずみ ✓':'今日はこれにする(+10XP)'}</button></div>
-<div class="card ${c.length?'warn':'ok'}"><h3>友だちと被りチェック</h3><p>${c.length?`⚠️ ${c.join('、')}が被りそう。クローゼットに別の色があると回避できるよ`:'✨ フォロー中の友だちとは被ってないよ'}</p></div>${shop(1)}`},
-wk(){return`<button class="pb alt" style="margin:0 0 10px" onclick="S.seed++;save();render()">🔀 別のコーデにする</button>`+PL.map((o,i)=>{const d=W[i],dt=new Date(d.d);return`<div class="card row" onclick="day(${i})"><div class="dd">${dt.getMonth()+1}/${dt.getDate()}<br><small>(${WD[dt.getDay()]})</small></div><div>${wx(d)}<br><small>${d.hi}°/${d.lo}°</small></div><div class="mini">${fit(o,1)}</div><div class="tg">${tags(S.sched[d.d]||{})}</div></div>`}).join('')},
-closet(){return`<button class="pb" style="margin:0 0 10px" onclick="$('#fp').click()">📷 服を撮って登録</button><button class="tool" onclick="addForm()">✏️ 写真なしで追加</button><p class="tip">色は写真から自動で選びます。種類は自分で選んでね。</p><div class="grid">${S.closet.map(x=>`<div class="it"><button class="rm" onclick="rm('${x.id}')" aria-label="削除">×</button>${ico(x)}<br><b>${x.n}</b><br><small>${CAT[x.cat]}・${COL[x.col][1]}</small></div>`).join('')}</div>${shop(3)}`},
-cal(){const y=cy,m=cm,f=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate(),td=iso(today);let h=`<div class="card"><div class="row" style="justify-content:space-between;padding:0"><button class="tool" style="width:auto" onclick="mv(-1)">◀</button><h3>${y}年${m+1}月</h3><button class="tool" style="width:auto" onclick="mv(1)">▶</button></div><div class="cal">${[...WD].map(x=>`<div class="h">${x}</div>`).join('')}${'<div class="h"></div>'.repeat(f)}`;
-for(let i=1;i<=n;i++){const d=`${y}-${pad(m+1)}-${pad(i)}`;h+=`<div class="${d==td?'t':''}" onclick="dsel('${d}')">${i}<i>${Object.keys(SC).filter(k=>(S.sched[d]||{})[k]).map(k=>SC[k][0]).join('')}</i></div>`}
-return h+`</div></div><div class="card"><h3>予定の読み込み</h3><button class="tool" onclick="$('#fo').click()">📒 手帳の写真から読み取る</button><button class="tool" onclick="$('#fi').click()">📆 カレンダーの.icsを取り込む</button><p class="tip">Googleカレンダーなどは「.icsで書き出し」したファイルを選んでね。手帳の写真は日付をタップしてから読み込むとその日に反映されます。文字認識は手書きだと外れることがあります。</p></div>`},
-fr(){const g=S.me.g,L=FR.filter(f=>FL=='same'?f.g==g:FL=='fol'?S.fol.includes(f.id):1).sort((a,b)=>b.s-a.s),d=W[0].d;
-return`<div class="card" onclick="prof()"><div class="row" style="padding:0"><div class="av">${S.me.em}</div><div style="flex:1"><b>${S.me.n}</b> <small>${g}・Lv.${lv()}</small><div class="bar"><i style="width:${S.me.xp%100}%"></i></div></div><div>🔥${S.me.st}</div></div></div>
-<div class="ch">${[['same','同学年'],['fol','フォロー中'],['all','全員']].map(([k,v])=>`<b class="${FL==k?'on':''}" onclick="FL='${k}';render()">${v}</b>`).join('')}</div>`+(L.map(f=>{const o=fobj(f,d),fo=S.fol.includes(f.id),k=x=>S.lk[f.id+x]||0;return`<div class="card"><div class="row" style="padding:0"><div class="av">${f.em}</div><div style="flex:1"><b>${f.n}</b> <small>${f.g}${f.g==g?'・同学年':''}・おしゃれ度${f.s}</small></div><button class="ch" style="border:0;background:none" onclick="fl('${f.id}')"><b class="${fo?'on':''}">${fo?'フォロー中':'＋フォロー'}</b></button></div>${fit(o)}<p><small>${[o.outer,o.top,o.bottom].filter(Boolean).map(x=>x.n).join(' / ')}</small></p><div class="ch"><b onclick="rc('${f.id}','a')">💗 かわいい ${k('a')}</b><b onclick="rc('${f.id}','b')">💡 参考にする ${k('b')}</b></div></div>`}).join('')||'<div class="card"><p>まだ誰もいないよ。「全員」からフォローしてみよう</p></div>')+'<p class="tip">※友だちはデモ用のサンプルです(実際のSNS機能にはサーバーが必要)。</p>'}};
-const TABS=[['home','🏠','ホーム'],['wk','🗓️','週間'],['closet','👕','クローゼット'],['cal','📒','手帳'],['fr','👯','みんな']];
-let FL='same',cy=today.getFullYear(),cm=today.getMonth(),selD=iso(today),selI=null;
-function render(){calc();$('#main').innerHTML=V[T]();$('#nav').innerHTML=TABS.map(([k,e,n])=>`<button class="${T==k?'on':''}" onclick="T='${k}';render();$('#main').scrollTop=0"><span>${e}</span>${n}</button>`).join('');$('#avb').textContent=S.me.em;$('#wxb').textContent=wx(W[0])}
-function sheet(h){$('#sh').innerHTML=`<div class="sb">${h}<button onclick="cl()">とじる</button></div>`;$('#sh').classList.add('on')}
-function cl(){$('#sh').classList.remove('on');selI=null}
-const lv=()=>Math.floor(S.me.xp/100)+1;
-function day(i){selI=i;const d=W[i],o=PL[i],dt=new Date(d.d),c=clash(o,d.d);sheet(`<h3>${dt.getMonth()+1}/${dt.getDate()}(${WD[dt.getDay()]}) ${wx(d)} ${d.hi}°/${d.lo}°</h3>${fit(o)}<p>${[o.outer,o.top,o.bottom,o.shoes].filter(Boolean).map(x=>x.n).join(' + ')}</p>${o.tips.map(t=>`<p class="hl">${t}</p>`).join('')}<p>${c.length?'⚠️ '+c.join('、')+'が被りそう':'✨ 友だちと被りなし'}</p>${chips(d.d)}`)}
-function wear(){const d=W[0].d;if(S.me.last==d)return;const y=iso(addD(today,-1));S.me.st=S.me.last==y?S.me.st+1:1;S.me.last=d;S.me.xp+=10;save();render();toast(`記録したよ!🔥${S.me.st}日連続 +10XP`)}
-function fl(id){S.fol=S.fol.includes(id)?S.fol.filter(x=>x!=id):[...S.fol,id];if(S.fol.length>=3&&!S.me.b3)S.me.xp+=20;save();render()}
-function rc(id,k){S.lk[id+k]=(S.lk[id+k]||0)+1;save();render()}
-function rm(id){if(confirm('この服を削除する?')){S.closet=S.closet.filter(x=>x.id!=id);save();render()}}
-function prof(){const B=[['👕','はじめの1着',S.closet.length>=1],['🔥','3日連続',S.me.st>=3],['🧥','10着登録',S.closet.length>=10],['🤝','3人フォロー',S.fol.length>=3]];
-sheet(`<h3>${S.me.em} プロフィール</h3><input type="text" value="${S.me.n}" oninput="S.me.n=this.value;save()" aria-label="名前"><select onchange="S.me.g=this.value;save();render()" aria-label="学年">${['中1','中2','中3','高1','高2','高3'].map(g=>`<option ${g==S.me.g?'selected':''}>${g}</option>`).join('')}</select><div class="ch">${['😊','🐶','🐼','🦁','🌸','⚡'].map(e=>`<b class="${S.me.em==e?'on':''}" onclick="S.me.em='${e}';save();prof();render()">${e}</b>`).join('')}</div><p>Lv.${lv()}・${S.me.xp}XP・🔥${S.me.st}日連続</p><div class="bar"><i style="width:${S.me.xp%100}%"></i></div><div class="ch">${B.map(b=>`<b class="${b[2]?'on':'ng'}" style="${b[2]?'':'opacity:.4'}">${b[0]} ${b[1]}</b>`).join('')}</div><div class="ch"><b class="${S.pro?'':'on'}" onclick="S.pro=false;save();prof();render()">無料版(おすすめ表示あり)</b><b class="${S.pro?'on':''}" onclick="S.pro=true;save();prof();render()">Pro(広告なし)</b></div>`)}
-/* closet add */
-let D={};
-function nearest(r,g,b){let k0,bd=1e9;for(const k in COL){const h=COL[k][0],d=(parseInt(h.slice(1,3),16)-r)**2+(parseInt(h.slice(3,5),16)-g)**2+(parseInt(h.slice(5,7),16)-b)**2;if(d<bd){bd=d;k0=k}}return k0}
-$('#fp').onchange=e=>{const f=e.target.files[0];e.target.value='';if(!f)return;const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),r=Math.min(1,240/Math.max(im.width,im.height));c.width=im.width*r;c.height=im.height*r;const x=c.getContext('2d');x.drawImage(im,0,0,c.width,c.height);const w=(c.width*.3|0)||1,h=(c.height*.3|0)||1,p=x.getImageData(c.width*.35|0,c.height*.35|0,w,h).data;let R=0,G=0,B=0,n=p.length/4;for(let i=0;i<p.length;i+=4){R+=p[i];G+=p[i+1];B+=p[i+2]}addForm(c.toDataURL('image/jpeg',.7),nearest(R/n,G/n,B/n))};im.src=URL.createObjectURL(f)};
-function addForm(ph,col){D={ph:ph||'',col:col||'white',cat:'top',w:3,r:0,n:''};af()}
-function af(){sheet(`<h3>服を登録</h3>${D.ph?`<img class="pv" src="${D.ph}" alt="">`:''}<input type="text" placeholder="名前(例:白T)" value="${D.n}" oninput="D.n=this.value" aria-label="名前"><p>種類</p><div class="ch">${Object.entries(CAT).map(([k,v])=>`<b class="${D.cat==k?'on':''}" onclick="D.cat='${k}';af()">${v}</b>`).join('')}</div><p>色</p><div class="ch">${Object.entries(COL).map(([k,v])=>`<i class="sw ${D.col==k?'on':''}" style="background:${v[0]}" title="${v[1]}" onclick="D.col='${k}';af()"></i>`).join('')}</div><p>あったかさ(1うすい〜5あつい)</p><input type="range" min="1" max="5" value="${D.w}" oninput="D.w=+this.value"><label><input type="checkbox" ${D.r?'checked':''} onchange="D.r=this.checked?1:0"> 雨の日OK</label><button class="pb" onclick="saveItem()">登録する</button>`)}
-function saveItem(){S.closet.push({id:'u'+Date.now(),n:D.n||COL[D.col][1]+CAT[D.cat],cat:D.cat,col:D.col,w:D.w,r:D.r,ph:D.ph});save();cl();render();toast('クローゼットに追加したよ')}
-/* calendar */
-function mv(n){cm+=n;if(cm<0){cm=11;cy--}if(cm>11){cm=0;cy++}render()}
-function dsel(d){selD=d;const dt=new Date(d);sheet(`<h3>${dt.getMonth()+1}/${dt.getDate()}(${WD[dt.getDay()]})の予定</h3>${chips(d).replace(/render\(\)/g,'')}<p class="tip">タップで有/無を切り替え</p>`);window.tg=function(d,k){S.sched[d]=S.sched[d]||{};S.sched[d][k]=!S.sched[d][k];save();dsel(d);render();selI=null}}
-function applyText(t,d,q){const K={club:/部活|練習|試合|クラブ/,pool:/プール|水泳/,pe:/体育|運動会|マラソン/};let hit=[];for(const k in K)if(K[k].test(t)){S.sched[d]=S.sched[d]||{};S.sched[d][k]=true;hit.push(SC[k])}if(!q){save();render();toast(hit.length?`${d}に反映:${hit.join('・')}`:'予定のキーワードが見つかりませんでした')}return hit.length>0}
-$('#fo').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;toast('読み取り中…(初回は少し時間がかかります)');try{if(!window.Tesseract)await new Promise((r,j)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';s.onload=r;s.onerror=j;document.head.appendChild(s)});const{data}=await Tesseract.recognize(f,'jpn');applyText(data.text,selD)}catch(x){toast('読み取れませんでした。日付をタップして手入力してね')}};
-$('#fi').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;const t=await f.text();let n=0;t.split('BEGIN:VEVENT').slice(1).forEach(b=>{const m=b.match(/DTSTART[^:]*:(\d{4})(\d\d)(\d\d)/),s=(b.match(/SUMMARY[^:]*:(.*)/)||[])[1]||'';if(m&&applyText(s,`${m[1]}-${m[2]}-${m[3]}`,1))n++});save();render();toast(n+'件の予定を反映したよ')};
-render();
+function rShop(){const L=[...D.wish].sort((a,b)=>a.done-b.done||b.ts-a.ts),tot=L.filter(w=>!w.done).reduce((s,w)=>s+(w.price||0),0);$('#wtot').textContent=L.some(w=>!w.done&&w.price)?`合計 ${yen(tot)}`:'';
+$('#wl').innerHTML=L.length?L.map(w=>`<div class="wr ${w.done?'dn':''}"><md-checkbox touch-target="wrapper" data-w="${w.id}" ${w.done?'checked':''} aria-label="購入済み"></md-checkbox><div class="wt" data-a="wedit" data-i="${w.id}"><div class="tm">${esc(w.name)}</div><div class="bm v">${w.price?yen(w.price):'予算未設定'}</div></div>${w.url?`<md-icon-button href="${esc(w.url)}" target="_blank" aria-label="開く"><md-icon>open_in_new</md-icon></md-icon-button>`:''}<md-icon-button data-a="wdel" data-i="${w.id}" aria-label="削除"><md-icon>delete</md-icon></md-icon-button></div>`).join(''):'<div class="em"><md-icon>shopping_cart</md-icon><div class="tm">ほしい物はまだありません</div><div class="bm">右下の「追加」から登録しましょう</div></div>'}
+$('#wl').addEventListener('change',async e=>{const w=D.wish.find(x=>x.id==e.target.dataset.w);if(!w)return;w.done=e.target.checked;await fail(()=>put('wish',w));rShop()});
+function wopen(w){WE=w||null;$('#wdt').textContent=w?'ほしい物を編集':'ほしい物を追加';$('#wn').value=w?.name||'';$('#wp').value=w?.price||'';$('#wu').value=w?.url||'';['#wn','#wp','#wu'].forEach(i=>$(i).error=false);$('#wd').show()}
+$('#wf').onsubmit=e=>{e.preventDefault();wsave()};
+async function wsave(){const n=$('#wn'),p=$('#wp'),u=$('#wu'),nm=n.value.trim(),pr=p.value===''?0:Number(p.value),ur=u.value.trim();let bad=0;
+n.error=!nm;n.errorText=nm?'':'名前を入力してください';p.error=!(pr>=0&&Number.isFinite(pr));p.errorText=p.error?'0以上の数字を入力してください':'';u.error=!!ur&&!/^https?:\/\/\S+$/.test(ur);u.errorText=u.error?'http:// または https:// で始まるURLを入力してください':'';
+if(n.error||p.error||u.error)return;const w=WE||{id:crypto.randomUUID(),done:false,ts:Date.now()};Object.assign(w,{name:nm,price:Math.round(pr),url:ur});await fail(async()=>{await put('wish',w);if(!WE)D.wish.push(w);$('#wd').close('ok');rShop();snack('保存しました')})}
+/* sub screens (history-backed) */
+function showSub(s,p){const sb=$('#sub');let t='',a='',b='';
+if(s=='d'){const c=D.clothes.find(x=>x.id==p);if(!c)return;t=c.name;a='<md-icon-button data-a="cdel" aria-label="削除"><md-icon class="dg">delete</md-icon></md-icon-button>';b=`<div class="imgbox sq"><img src="${url(c)}" alt=""></div><div class="form">${fields('e',c)}<md-filled-tonal-button data-a="today"><md-icon slot="icon">today</md-icon>今日の一着にする</md-filled-tonal-button><md-filled-button data-a="esave"><md-icon slot="icon">check</md-icon>保存</md-filled-button></div>`;sb.dataset.i=p}
+if(s=='p'){t='プロフィール';b=`<div class="form"><div class="em" style="padding:8px"><md-icon style="font-size:72px;width:72px;height:72px" class="f">account_circle</md-icon></div><md-outlined-text-field id="pn" label="ニックネーム" maxlength="20" value="${esc(D.meta.name?.v)}"></md-outlined-text-field><div class="bm v">服 ${D.clothes.length}着 ・ ほしい物 ${D.wish.length}件</div><md-filled-button data-a="psave">保存</md-filled-button></div>`}
+if(s=='s'){t='設定';b=`<md-list><md-list-item type="button" data-a="exp"><md-icon slot="start">download</md-icon><div slot="headline">データを書き出す</div><div slot="supporting-text">服・ほしい物・チャットをJSONで保存</div></md-list-item><md-list-item type="button" data-a="wipe"><md-icon slot="start" class="dg">delete_forever</md-icon><div slot="headline" class="dg">すべてのデータを削除</div><div slot="supporting-text">この端末に保存された内容を消去します</div></md-list-item></md-list><div class="bm v" style="padding:16px">データはこの端末のブラウザ内にのみ保存されます。</div>`}
+sb.innerHTML=`<div class="tb"><md-icon-button data-a="back" aria-label="戻る"><md-icon>arrow_back</md-icon></md-icon-button><div class="tl" style="text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${esc(t)}</div>${a}</div><div class="sb">${b}</div>`;sb.offsetWidth;sb.classList.add('on')}
+const hideSub=()=>$('#sub').classList.remove('on'),push=(s,p)=>{history.pushState({s,p},'');showSub(s,p)};
+history.replaceState(null,'');addEventListener('popstate',e=>e.state&&e.state.s?showSub(e.state.s,e.state.p):hideSub());
+/* actions */
+const A={back:()=>history.back(),open:i=>push('d',i),prof:()=>push('p'),set:()=>push('s'),goup:()=>go(3),wadd:()=>wopen(),wx:()=>$('#wd').close(),ws:wsave,pick:()=>$('#fp').click(),send:()=>send(),
+wedit:i=>wopen(D.wish.find(w=>w.id==i)),
+async wdel(i){const w=D.wish.find(x=>x.id==i);if(w&&await ask('削除しますか?',`「${w.name}」をリストから削除します。`,'削除',1))await fail(async()=>{await del('wish',i);D.wish=D.wish.filter(x=>x.id!=i);rShop();snack('削除しました')})},
+async clr(){if(D.chat.length&&await ask('履歴を消しますか?','チャットの履歴をすべて削除します。','削除',1))await fail(async()=>{await clr('chat');D.chat=[];rChat();snack('履歴を消しました')})},
+async up(){const v=rf('u');if(!UP){$('#ub').classList.add('err');snack('写真を選んでください');if(v)return;return}if(!v)return;await fail(async()=>{const c={id:crypto.randomUUID(),img:UP,ts:Date.now(),...v};await put('clothes',c);D.clothes.push(c);UP=null;$('#ub').innerHTML='<md-ripple></md-ripple><div class="em"><md-icon>add_a_photo</md-icon><div class="bm">写真を選ぶ・撮る</div></div>';$('#uf').innerHTML=fields('u');snack('登録しました');go(1)})},
+async esave(){const v=rf('e'),c=D.clothes.find(x=>x.id==$('#sub').dataset.i);if(!v||!c)return;await fail(async()=>{Object.assign(c,v);await put('clothes',c);rHome();rCloset();snack('保存しました');history.back()})},
+async today(){const c=D.clothes.find(x=>x.id==$('#sub').dataset.i);D.meta.pick={k:'pick',d:new Date().toDateString(),id:c.id};await fail(()=>put('meta',D.meta.pick));rHome();snack('今日の一着に設定しました')},
+async cdel(){const c=D.clothes.find(x=>x.id==$('#sub').dataset.i);if(c&&await ask('この服を削除しますか?',`「${c.name}」を削除します。元に戻せません。`,'削除',1))await fail(async()=>{await del('clothes',c.id);D.clothes=D.clothes.filter(x=>x.id!=c.id);history.back();R();snack('削除しました')})},
+async psave(){const v=$('#pn').value.trim();D.meta.name={k:'name',v};await fail(()=>put('meta',D.meta.name));snack('保存しました')},
+async exp(){const d=b=>new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(b)});await fail(async()=>{const cl=await Promise.all(D.clothes.map(async c=>({...c,img:await d(c.img)}))),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({v:1,clothes:cl,wish:D.wish,chat:D.chat})],{type:'application/json'}));a.download='coordy-backup.json';a.click();snack('書き出しました')})},
+async wipe(){if(await ask('すべて削除しますか?','服・ほしい物・チャット・プロフィールをすべて消去します。元に戻せません。','すべて削除',1))await fail(async()=>{for(const n of['clothes','chat','wish','meta'])await clr(n);D.clothes=[];D.chat=[];D.wish=[];D.meta={};history.back();R();snack('削除しました')})}};
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(t&&A[t.dataset.a])A[t.dataset.a](t.dataset.i)});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList?.contains('card')){e.preventDefault();e.target.click()}});
+$('#hs').onclick=()=>rHome(1);
+/* boot */
+(async()=>{try{const[c,h,w,m]=await Promise.all([all('clothes'),all('chat'),all('wish'),all('meta')]);D.clothes=c.sort((a,b)=>b.ts-a.ts);D.chat=h;D.wish=w;m.forEach(x=>D.meta[x.k]=x)}catch(e){snack('この環境ではデータを保存できません')}R()})();
 </script></body></html>
