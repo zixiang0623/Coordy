@@ -14,3 +14,10 @@
 ```
 npx wrangler deploy
 ```
+
+## ビルド
+Material Webは外部CDNに依存せず、`src/` でバンドルして `public/index.html` に埋め込みます。
+```
+cd src && npm install && npm run build
+```
+編集するのは `src/template.html`(画面)と `src/mw.js`(使うコンポーネント)です。
