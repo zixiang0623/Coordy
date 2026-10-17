@@ -22,7 +22,7 @@
 --md-navigation-bar-container-color:var(--sc);--md-navigation-bar-container-height:80px;--md-navigation-bar-active-indicator-width:64px;--md-navigation-bar-active-indicator-height:32px;
 --md-dialog-container-shape:28px;--md-dialog-container-color:var(--md-sys-color-surface-container-high);
 --e:cubic-bezier(.2,0,0,1)}
-*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0}md-dialog{margin:auto}
 body{background:var(--schst);font-family:var(--md-ref-typeface-plain);color:var(--os);overflow:hidden}
 #app{position:relative;width:min(100vw,412px);height:min(100dvh,892px);margin:0 auto;display:flex;flex-direction:column;background:var(--s);overflow:hidden}
 md-icon.f{font-variation-settings:'FILL' 1}
@@ -38,9 +38,13 @@ main>section{display:none;min-height:100%}main>section.on{display:block;animatio
 .imgbox.err{outline:2px solid var(--er)}
 .tap{cursor:pointer;transition:transform .2s var(--e)}.tap:active{transform:scale(.97)}
 .em{display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px;color:var(--osv)}.em md-icon{font-size:48px;width:48px;height:48px}
-.cm{width:min(384px,100%);text-align:left;overflow-wrap:anywhere}.cm .hs{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.car{display:flex;gap:16px;width:min(384px,100%);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}.car::-webkit-scrollbar{display:none}
+.sl{flex:0 0 100%;scroll-snap-align:center;display:flex;flex-direction:column;gap:12px}.sl .imgbox{width:100%}
+.dots{display:flex}.dots b{display:grid;place-items:center;width:24px;height:24px;cursor:pointer}.dots b::after{content:'';width:8px;height:8px;border-radius:4px;background:var(--olv);transition:width .3s var(--e),background .3s var(--e)}.dots b.on::after{width:24px;background:var(--p)}
+.cm{width:100%;text-align:left;overflow-wrap:anywhere}.cm .hs{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .form{display:flex;flex-direction:column;gap:16px;padding:16px}
 .form md-outlined-text-field,.form md-outlined-select{width:100%}
+#uf{display:flex;flex-direction:column;gap:16px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:8px 16px 104px}
 .card{position:relative;border-radius:20px;background:var(--scl);overflow:hidden}.card img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:var(--sch)}.card .ct{padding:8px 12px 12px}.card .ct div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sr{padding:8px 16px 0}.sr md-outlined-text-field{width:100%;--md-outlined-text-field-container-shape:28px}
@@ -64,14 +68,13 @@ md-dialog [slot=actions]{display:flex;justify-content:center;gap:8px;width:100%}
 #snack{position:absolute;left:16px;right:16px;bottom:96px;z-index:9;padding:14px 16px;border-radius:12px;background:var(--md-sys-color-inverse-surface);color:var(--md-sys-color-inverse-on-surface);opacity:0;transform:translateY(8px);pointer-events:none;transition:.3s var(--e);font-size:14px}#snack.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 </style>
-<!--MW-->
+
 </head><body>
 <div id="app">
 <div class="tb" id="tb"><md-icon-button data-a="prof" aria-label="プロフィール"><md-icon>account_circle</md-icon></md-icon-button><div class="tl">Coordy</div><md-icon-button data-a="set" aria-label="設定"><md-icon>settings</md-icon></md-icon-button></div>
 <main id="mn">
-<section id="t0" class="on"><div class="imgbox tap" id="hb"><md-ripple></md-ripple></div>
-<div class="cm"><div class="lm v" id="hn"></div><div class="hs" id="hc"></div></div>
-<md-filled-tonal-button id="hs"><md-icon slot="icon">shuffle</md-icon>別の服にする</md-filled-tonal-button></section>
+<section id="t0" class="on"><div class="tm" id="hd"></div><div class="car" id="car"></div><div class="dots" id="dots"></div>
+<md-filled-tonal-button id="hs"><md-icon slot="icon">shuffle</md-icon>コーデを作り直す</md-filled-tonal-button></section>
 <section id="t1"><div class="sr"><md-outlined-text-field id="q" label="服を検索" type="search"><md-icon slot="leading-icon">search</md-icon></md-outlined-text-field></div>
 <md-chip-set id="fc"></md-chip-set><div class="lm v" id="cn" style="padding:0 16px 8px"></div><div id="cg"></div></section>
 <section id="t2"><div style="display:flex;align-items:center;padding:0 16px"><div class="tm" style="flex:1">コーデ相談</div><md-icon-button data-a="clr" aria-label="履歴を消す"><md-icon>delete_sweep</md-icon></md-icon-button></div><div id="cl"></div>
@@ -96,6 +99,7 @@ md-dialog [slot=actions]{display:flex;justify-content:center;gap:8px;width:100%}
 <md-dialog id="ad"><md-icon slot="icon">apparel</md-icon><div slot="headline">服を追加</div><div slot="content" class="form" style="padding:0"><md-filled-tonal-button data-a="cam"><md-icon slot="icon">photo_camera</md-icon>写真を撮る</md-filled-tonal-button><md-filled-tonal-button data-a="lib"><md-icon slot="icon">photo_library</md-icon>ライブラリから選ぶ</md-filled-tonal-button></div><div slot="actions"><md-text-button data-a="adx">キャンセル</md-text-button></div></md-dialog>
 <md-dialog id="wd"><md-icon slot="icon">add_shopping_cart</md-icon><div slot="headline" id="wdt"></div><form slot="content" id="wf" method="dialog" class="form" style="padding:0"><md-outlined-text-field id="wn" label="名前" maxlength="40"></md-outlined-text-field><md-outlined-text-field id="wp" label="予算(円・任意)" type="number" min="0" inputmode="numeric"></md-outlined-text-field><md-outlined-text-field id="wu" label="URL(任意)" type="url"></md-outlined-text-field></form><div slot="actions"><md-text-button data-a="wx">キャンセル</md-text-button><md-text-button data-a="ws">保存</md-text-button></div></md-dialog>
 <input type="file" id="fp" accept="image/*" hidden><input type="file" id="fcam" accept="image/*" capture="environment" hidden>
+<!--MW-->
 <script type="module">
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),hs=s=>[...String(s)].reduce((a,c)=>a+c.charCodeAt(0),0);
 const CATS=['トップス','ボトムス','アウター','シューズ','小物'],COLS=['白','黒','グレー','ネイビー','青','ベージュ','茶','赤','ピンク','緑','カーキ','黄','その他'],WM=['うすい','やや薄い','ふつう','あたたかい','とてもあたたかい'];
@@ -113,10 +117,15 @@ $('#nb').addEventListener('navigation-bar-activated',()=>go($('#nb').activeIndex
 $('#mn').addEventListener('scroll',e=>$('#tb').classList.toggle('sc',e.target.scrollTop>0));
 function R(){rHome();rCloset();rChat();rShop()}
 /* home */
-function pick(sh){const L=D.clothes;if(!L.length)return null;const t=new Date().toDateString();let p=D.meta.pick;if(sh||!p||p.d!=t||!L.some(c=>c.id==p.id)){let o=L.filter(c=>!p||c.id!=p.id);if(!o.length)o=L;const c=sh?o[Math.random()*o.length|0]:L[hs(t)%L.length];p={k:'pick',d:t,id:c.id};D.meta.pick=p;put('meta',p)}return L.find(c=>c.id==p.id)}
-function rHome(sh){const c=pick(sh),b=$('#hb');$('#hs').hidden=D.clothes.length<2;
-if(!c){b.innerHTML='<md-ripple></md-ripple><div class="em"><md-icon>apparel</md-icon><div class="tm">まだ服がありません</div><div class="bm">「アップロード」から写真を追加しましょう</div></div>';b.dataset.a='goup';$('#hn').textContent='';$('#hc').textContent='';return}
-b.dataset.a='open';b.dataset.i=c.id;b.innerHTML=`<md-ripple></md-ripple><img src="${url(c)}" alt="${esc(c.name)}">`;$('#hn').textContent=`${c.name} ・ ${c.cat} ・ ${c.col}`;const t=c.note||'コメントはまだありません。タップして追加できます';const h=$('#hc');h.textContent=t;h.className='hs'+(c.note?'':' v');h.style.fontSize=t.length>24?'22px':'28px'}
+const ORD=['トップス','アウター','ボトムス','シューズ'],car=()=>$('#car');
+function outfit(sh){const t=new Date().toDateString(),need=ORD.filter(k=>D.clothes.some(c=>c.cat==k)).length;let p=D.meta.pick;const ok=p&&p.d==t&&p.ids&&p.ids.length==need&&p.ids.every(i=>D.clothes.some(c=>c.id==i));
+if(sh||!ok){const prev=(p&&p.ids)||[];p={k:'pick',d:t,ids:ORD.map(k=>{const L=D.clothes.filter(c=>c.cat==k),M=L.filter(c=>!prev.includes(c.id));return L.length?(sh?(M.length?M:L)[Math.random()*(M.length||L.length)|0]:L[hs(t+k)%L.length]).id:null}).filter(Boolean)};D.meta.pick=p;put('meta',p)}
+return p.ids.map(i=>D.clothes.find(c=>c.id==i))}
+function rHome(sh){const L=D.clothes,o=L.length?outfit(sh):[],cr=car(),d=new Date();$('#hs').hidden=!o.length;$('#dots').hidden=o.length<2;$('#hd').textContent=o.length?`${d.getMonth()+1}月${d.getDate()}日のコーデ`:'';
+if(!o.length){cr.innerHTML=`<div class="sl"><div class="imgbox tap" data-a="goup"><md-ripple></md-ripple><div class="em"><md-icon>apparel</md-icon><div class="tm">${L.length?'トップス〜シューズの服がありません':'まだ服がありません'}</div><div class="bm">「アップロード」から写真を追加しましょう</div></div></div></div>`;$('#dots').innerHTML='';return}
+cr.innerHTML=o.map(c=>{const t=c.note||'コメントはまだありません。タップして追加できます';return`<div class="sl"><div class="imgbox tap" data-a="open" data-i="${c.id}"><md-ripple></md-ripple><img src="${url(c)}" alt="${esc(c.name)}"></div><div class="cm"><div class="lm v">${c.cat} ・ ${esc(c.name)} ・ ${c.col}</div><div class="hs${c.note?'':' v'}" style="font-size:${t.length>24?22:28}px">${esc(t)}</div></div></div>`}).join('');
+$('#dots').innerHTML=o.map((_,i)=>`<b class="${i?'':'on'}" data-a="dot" data-i="${i}" aria-label="${i+1}枚目"></b>`).join('');cr.scrollLeft=0}
+$('#car').addEventListener('scroll',()=>{const c=car(),i=Math.round(c.scrollLeft/(c.clientWidth+16));$$('#dots b').forEach((b,k)=>b.classList.toggle('on',k==i))});
 /* closet */
 function rCloset(){const q=$('#q').value.trim().toLowerCase(),L=D.clothes.filter(c=>(!F.size||F.has(c.cat))&&(!q||(c.name+c.note+c.col+c.cat).toLowerCase().includes(q)));
 const fc=$('#fc');if(!fc.children.length)fc.innerHTML=CATS.map(c=>`<md-filter-chip label="${c}"></md-filter-chip>`).join('');
@@ -152,20 +161,20 @@ n.error=!nm;n.errorText=nm?'':'名前を入力してください';p.error=!(pr>=
 if(n.error||p.error||u.error)return;const w=WE||{id:crypto.randomUUID(),done:false,ts:Date.now()};Object.assign(w,{name:nm,price:Math.round(pr),url:ur});await fail(async()=>{await put('wish',w);if(!WE)D.wish.push(w);$('#wd').close('ok');rShop();snack('保存しました')})}
 /* sub screens (history-backed) */
 function showSub(s,p){const sb=$('#sub');let t='',a='',b='';
-if(s=='d'){const c=D.clothes.find(x=>x.id==p);if(!c)return;t=c.name;a='<md-icon-button data-a="cdel" aria-label="削除"><md-icon class="dg">delete</md-icon></md-icon-button>';b=`<div class="imgbox sq"><img src="${url(c)}" alt=""></div><div class="form">${fields('e',c)}<md-filled-tonal-button data-a="today"><md-icon slot="icon">today</md-icon>今日の一着にする</md-filled-tonal-button><md-filled-button data-a="esave"><md-icon slot="icon">check</md-icon>保存</md-filled-button></div>`;sb.dataset.i=p}
+if(s=='d'){const c=D.clothes.find(x=>x.id==p);if(!c)return;t=c.name;a='<md-icon-button data-a="cdel" aria-label="削除"><md-icon class="dg">delete</md-icon></md-icon-button>';b=`<div class="imgbox sq"><img src="${url(c)}" alt=""></div><div class="form">${fields('e',c)}<md-filled-tonal-button data-a="today"><md-icon slot="icon">today</md-icon>今日のコーデに入れる</md-filled-tonal-button><md-filled-button data-a="esave"><md-icon slot="icon">check</md-icon>保存</md-filled-button></div>`;sb.dataset.i=p}
 if(s=='p'){t='プロフィール';b=`<div class="form"><div class="em" style="padding:8px"><md-icon style="font-size:72px;width:72px;height:72px" class="f">account_circle</md-icon></div><md-outlined-text-field id="pn" label="ニックネーム" maxlength="20" value="${esc(D.meta.name?.v)}"></md-outlined-text-field><div class="bm v">服 ${D.clothes.length}着 ・ ほしい物 ${D.wish.length}件</div><md-filled-button data-a="psave">保存</md-filled-button></div>`}
 if(s=='s'){t='設定';b=`<md-list><md-list-item type="button" data-a="exp"><md-icon slot="start">download</md-icon><div slot="headline">データを書き出す</div><div slot="supporting-text">服・ほしい物・チャットをJSONで保存</div></md-list-item><md-list-item type="button" data-a="wipe"><md-icon slot="start" class="dg">delete_forever</md-icon><div slot="headline" class="dg">すべてのデータを削除</div><div slot="supporting-text">この端末に保存された内容を消去します</div></md-list-item></md-list><div class="bm v" style="padding:16px">データはこの端末のブラウザ内にのみ保存されます。</div>`}
-sb.innerHTML=`<div class="tb"><md-icon-button data-a="back" aria-label="戻る"><md-icon>arrow_back</md-icon></md-icon-button><div class="tl" style="text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${esc(t)}</div>${a}</div><div class="sb">${b}</div>`;sb.classList.toggle('l',s=='p');sb.offsetWidth;sb.classList.add('on')}
+sb.innerHTML=`<div class="tb"><md-icon-button data-a="back" aria-label="戻る"><md-icon>arrow_back</md-icon></md-icon-button><div class="tl" style="text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${esc(t)}</div>${a}</div><div class="sb">${b}</div>`;sb.style.transition='none';sb.classList.toggle('l',s=='p');sb.offsetWidth;sb.style.transition='';sb.classList.add('on')}
 const hideSub=()=>$('#sub').classList.remove('on'),push=(s,p)=>{history.pushState({s,p},'');showSub(s,p)};
 history.replaceState(null,'');addEventListener('popstate',e=>e.state&&e.state.s?showSub(e.state.s,e.state.p):hideSub());
 /* actions */
-const A={back:()=>history.back(),open:i=>push('d',i),prof:()=>push('p'),set:()=>push('s'),goup:()=>go(3),add:()=>$('#ad').show(),adx:()=>$('#ad').close(),cam:()=>{$('#ad').close();$('#fcam').click()},lib:()=>{$('#ad').close();$('#fp').click()},wadd:()=>wopen(),wx:()=>$('#wd').close(),ws:wsave,pick:()=>$('#fp').click(),send:()=>send(),
+const A={dot:i=>{const c=car();c.scrollTo({left:i*(c.clientWidth+16),behavior:'smooth'})},back:()=>history.back(),open:i=>push('d',i),prof:()=>push('p'),set:()=>push('s'),goup:()=>go(3),add:()=>$('#ad').show(),adx:()=>$('#ad').close(),cam:()=>{$('#ad').close();$('#fcam').click()},lib:()=>{$('#ad').close();$('#fp').click()},wadd:()=>wopen(),wx:()=>$('#wd').close(),ws:wsave,pick:()=>$('#fp').click(),send:()=>send(),
 wedit:i=>wopen(D.wish.find(w=>w.id==i)),
 async wdel(i){const w=D.wish.find(x=>x.id==i);if(w&&await ask('削除しますか?',`「${w.name}」をリストから削除します。`,'削除',1))await fail(async()=>{await del('wish',i);D.wish=D.wish.filter(x=>x.id!=i);rShop();snack('削除しました')})},
 async clr(){if(D.chat.length&&await ask('履歴を消しますか?','チャットの履歴をすべて削除します。','削除',1))await fail(async()=>{await clr('chat');D.chat=[];rChat();snack('履歴を消しました')})},
 async up(){const v=rf('u');if(!UP){$('#ub').classList.add('err');snack('写真を選んでください');if(v)return;return}if(!v)return;await fail(async()=>{const c={id:crypto.randomUUID(),img:UP,ts:Date.now(),...v};await put('clothes',c);D.clothes.push(c);UP=null;$('#ub').innerHTML='<md-ripple></md-ripple><div class="em"><md-icon>add_a_photo</md-icon><div class="bm">写真を選ぶ・撮る</div></div>';$('#uf').innerHTML=fields('u');snack('登録しました');go(1)})},
 async esave(){const v=rf('e'),c=D.clothes.find(x=>x.id==$('#sub').dataset.i);if(!v||!c)return;await fail(async()=>{Object.assign(c,v);await put('clothes',c);rHome();rCloset();snack('保存しました');history.back()})},
-async today(){const c=D.clothes.find(x=>x.id==$('#sub').dataset.i);D.meta.pick={k:'pick',d:new Date().toDateString(),id:c.id};await fail(()=>put('meta',D.meta.pick));rHome();snack('今日の一着に設定しました')},
+async today(){const c=D.clothes.find(x=>x.id==$('#sub').dataset.i);if(!ORD.includes(c.cat))return snack('トップス〜シューズの服が対象です');const ids=outfit().filter(x=>x.cat!=c.cat).concat(c).sort((x,y)=>ORD.indexOf(x.cat)-ORD.indexOf(y.cat)).map(x=>x.id);D.meta.pick={k:'pick',d:new Date().toDateString(),ids};await fail(()=>put('meta',D.meta.pick));rHome();snack('今日のコーデに入れました')},
 async cdel(){const c=D.clothes.find(x=>x.id==$('#sub').dataset.i);if(c&&await ask('この服を削除しますか?',`「${c.name}」を削除します。元に戻せません。`,'削除',1))await fail(async()=>{await del('clothes',c.id);D.clothes=D.clothes.filter(x=>x.id!=c.id);history.back();R();snack('削除しました')})},
 async psave(){const v=$('#pn').value.trim();D.meta.name={k:'name',v};await fail(()=>put('meta',D.meta.name));snack('保存しました')},
 async exp(){const d=b=>new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(b)});await fail(async()=>{const cl=await Promise.all(D.clothes.map(async c=>({...c,img:await d(c.img)}))),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({v:1,clothes:cl,wish:D.wish,chat:D.chat})],{type:'application/json'}));a.download='coordy-backup.json';a.click();snack('書き出しました')})},
